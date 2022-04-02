@@ -2,7 +2,7 @@
  * @Author       : wanglei
  * @Date         : 2022-04-01 21:11:53
  * @LastEditors  : wanglei
- * @LastEditTime : 2022-04-02 10:32:18
+ * @LastEditTime : 2022-04-02 09:23:51
  * @FilePath     : /shangguigu-redux/src/containers/Count/index.jsx
  * @description  : react-redux 容器组件
  */
@@ -15,7 +15,7 @@ import {
   createIncrementAction,
   createDecrementAction,
   createIncrementAsyncAction,
-} from '../../redux/actions/count';
+} from '../../redux/count_action';
 
 import {INCREMENT, DECREMENT} from '../../redux/constant'
 // 定义UI组件
@@ -45,7 +45,6 @@ class Count extends Component {
   render() {
     return (
       <div>
-        <h2>当前是Count组件</h2>
         <h1>当前求和为：{this.props.count} </h1>
         <select ref={(c) => (this.selectNumber = c)}>
           <option value="1">1</option>
@@ -67,10 +66,21 @@ class Count extends Component {
 // connect第一个调用的时候要传两个参数：两个参数必须是函数
 export default connect(
   (state) => ({ count: state }),
+
   // mapDispatchToProps 精简写法：
   {
     [INCREMENT]: createIncrementAction,
     [DECREMENT]: createDecrementAction,
     incrementAsync: createIncrementAsyncAction,
   }
+
+  // mapDispatchToProps的一般写法
+  // (dispatch) => ({
+  //   // 通知redux执行加法
+  //   [INCREMENT]: (data) => dispatch(createIncrementAction(data)),
+  //   // 通知redux执行减法
+  //   [DECREMENT]: (data) => dispatch(createDecrementAction(data)),
+  //   incrementAsync: (data, time) =>
+  //     dispatch(createIncrementAsyncAction(data, time)),
+  // })
 )(Count);
