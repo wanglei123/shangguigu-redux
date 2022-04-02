@@ -2,7 +2,7 @@
  * @Author       : wanglei
  * @Date         : 2022-04-01 21:11:53
  * @LastEditors  : wanglei
- * @LastEditTime : 2022-04-02 14:54:03
+ * @LastEditTime : 2022-04-02 15:57:40
  * @FilePath     : /shangguigu-redux/src/containers/Count/index.jsx
  * @description  : react-redux 容器组件
  */
@@ -12,9 +12,9 @@ import { connect } from 'react-redux';
 
 // 引入action
 import {
-  createIncrementAction,
-  createDecrementAction,
-  createIncrementAsyncAction,
+  increment,
+  decrement,
+  incrementAsync,
 } from '../../redux/actions/count';
 
 import {INCREMENT, DECREMENT} from '../../redux/constant'
@@ -68,8 +68,8 @@ export default connect(
   (state) => ({ count: state.count,personLength: state.person.length }),
   // mapDispatchToProps 精简写法：
   {
-    [INCREMENT]: createIncrementAction,
-    [DECREMENT]: createDecrementAction,
-    incrementAsync: createIncrementAsyncAction,
+    increment,
+    decrement,
+    incrementAsync,
   }
 )(Count);
